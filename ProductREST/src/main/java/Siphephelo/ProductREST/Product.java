@@ -7,9 +7,9 @@ import jakarta.persistence.Id;
 
 @Entity
 public class Product {
-    private Integer id;
-    private String name;
-    private float price;
+    private Integer id; //ProductID
+    private String name; //Product Name
+    private float price; //Product Price
 
     public Product(){
         super();
