@@ -4,9 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -26,6 +24,23 @@ public class ProductController {
             return new ResponseEntity<Product>(product, HttpStatus.OK);
         }catch (NoSuchElementException e){
             return new ResponseEntity<Product>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @PostMapping("/product")
+    public void add(@RequestBody Product product){
+        service.save(product);
+    }
+
+    @PutMapping("/product/{id}")
+    public ResponseEntity<?> update(@RequestBody Product product,
+                                          @PathVariable Integer id){
+        try {
+            Product existProduct = service.get(id);
+            service.save(product);
+            return new ResponseEntity<>(HttpStatus.OK);
+        }catch (NoSuchElementException e){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 }
