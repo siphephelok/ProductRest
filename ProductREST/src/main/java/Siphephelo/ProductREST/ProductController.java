@@ -43,4 +43,9 @@ public class ProductController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+
+    @DeleteMapping("/product/{id}")
+    public void delete(@PathVariable Integer id){
+        service.delete(id);
+    }
 }
